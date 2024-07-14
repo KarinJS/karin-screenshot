@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "tsc && tsc-alias",
-    "sort": "npx sort-package-json"
+    "sort": "npx sort-package-json",
+    "pub": "npm publish --access public"
   },
   "dependencies": {
     "decompress": "4.2.1",
