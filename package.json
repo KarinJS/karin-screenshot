@@ -1,0 +1,31 @@
+{
+  "name": "karin-screenshot",
+  "version": "0.0.10",
+  "author": "CalmLexi",
+  "type": "module",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "sort": "npx sort-package-json"
+  },
+  "dependencies": {
+    "decompress": "4.2.1",
+    "log4js": "6.9.1",
+    "puppeteer-core": "22.10.0"
+  },
+  "devDependencies": {
+    "@eslint/compat": "1.0.3",
+    "@eslint/js": "9.4.0",
+    "@types/node": "20.14.2",
+    "eslint": "latest",
+    "neostandard": "latest",
+    "sort-package-json": "2.10.0",
+    "tsc-alias": "1.8.10",
+    "typescript": "5.4.5"
+  }
+}

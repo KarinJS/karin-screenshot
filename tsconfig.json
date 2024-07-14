@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "baseUrl": "./",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "paths": {
+      "@Common": [
+        "src/imports/common.ts"
+      ],
+      "@imports/*": [
+        "src/imports/*"
+      ],
+      "@logger": [
+        "src/imports/logger.ts"
+      ],
+    },
+    "declaration": true,
+    "outDir": "./lib",
+    "removeComments": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src",
+    "src/index.ts"
+  ],
+}
