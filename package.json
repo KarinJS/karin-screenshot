@@ -1,6 +1,6 @@
 {
   "name": "karin-screenshot",
-  "version": "0.0.10",
+  "version": "1.0.0",
   "author": "CalmLexi",
   "type": "module",
   "main": "./lib/index.js",
