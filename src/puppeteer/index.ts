@@ -160,6 +160,9 @@ export default class Puppeteer {
       /** 创建页面 */
       const page = await this.browser.newPage()
 
+      /** 设置全局的HTTP头部 用于ws渲染识别 */
+      if (data.hash) await page.setExtraHTTPHeaders({ 'x-renderer-id': data.hash })
+
       /** 加载页面 */
       await page.goto(data.file, data.pageGotoParams)
 
@@ -197,9 +200,6 @@ export default class Puppeteer {
           try { await page.waitForResponse(res) } catch { }
         }
       }
-
-      /** 设置全局的HTTP头部 用于ws渲染识别 */
-      if (data.hash) await page.setExtraHTTPHeaders({ 'x-renderer-id': data.hash })
 
       const options = {
         path: data.path,
