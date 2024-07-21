@@ -2,7 +2,7 @@
   "name": "karin-screenshot",
   "version": "1.0.2",
   "author": "CalmLexi",
-  "type": "module",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
