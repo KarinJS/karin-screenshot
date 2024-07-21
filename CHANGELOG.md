@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/KarinJS/karin-screenshot/compare/v1.0.2...v1.0.3) (2024-07-21)
+
+
+### Bug Fixes
+
+* type ([d210c99](https://github.com/KarinJS/karin-screenshot/commit/d210c99b69cee3b8a8c02c5bd681d5a54c19b5dc))
+
 ## [1.0.2](https://github.com/KarinJS/karin-screenshot/compare/v1.0.1...v1.0.2) (2024-07-21)
 
 
