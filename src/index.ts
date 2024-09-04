@@ -1,11 +1,11 @@
-import Core from './puppeteer/core'
+import Render from './puppeteer/core'
 
 /**
  * @description Puppeteer多浏览器实例管理
  */
-export default Core
+export default Render
 
 /**
  * @description Puppeteer多浏览器实例管理
  */
-export { Core }
+export { Render as Core }

@@ -1,18 +1,19 @@
-import logger from '@logger'
-import decompress from 'decompress'
 import fs from 'fs'
-import https from 'https'
 import os from 'os'
 import path from 'path'
-import { pipeline } from 'stream'
-import { fileURLToPath } from 'url'
+import https from 'https'
+import logger from '@logger'
 import { promisify } from 'util'
+import { pipeline } from 'stream'
+import decompress from 'decompress'
+import { fileURLToPath } from 'url'
+import { exec as execCmd, ExecOptions } from 'child_process'
 
 const streamPipeline = promisify(pipeline)
 
-export type Platform = 'linux64' | 'mac-arm64' | 'mac-x64' | 'win32' | 'win64' | Error
+export type Platform = 'linux64' | 'mac-arm64' | 'mac-x64' | 'win32' | 'win64'
 
-class Common {
+export class Common {
   /**
    * 项目根目录
    */
@@ -47,12 +48,9 @@ class Common {
    */
   pathDir (): string {
     if (process.env.KarinPuppeteerDir) return process.env.KarinPuppeteerDir
-    const filename = fileURLToPath('file://' + __dirname)
-    const _dirname = path.dirname(filename)
-    let dir = path.join(_dirname, '../../')
-    dir = dir.replace(/\\/g, '/')
-    // 去掉最后的/ 标准化路径
-    dir = dir.replace(/\/$/, '')
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = path.dirname(__filename)
+    const dir = path.join(__dirname, '../..').replace(/\\/g, '/')
     return dir
   }
 
@@ -155,7 +153,20 @@ class Common {
       return false
     }
   }
+
+  /**
+   * 封装exec
+   * @param cmd - 命令
+   */
+  exec (cmd: string, options?: ExecOptions): Promise<string> {
+    return new Promise((resolve, reject) => {
+      execCmd(cmd, options, (error, stdout, stderr) => {
+        if (stdout) return resolve(stdout.toString().trim())
+        if (error) return reject(error)
+        return reject(stderr)
+      })
+    })
+  }
 }
 
-const common = new Common()
-export default common
+export const common = new Common()

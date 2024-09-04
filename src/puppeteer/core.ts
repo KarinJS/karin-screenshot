@@ -1,8 +1,8 @@
-import Common from '@Common'
+import { common } from '@Common'
 import logger from '@logger'
 import crypto from 'crypto'
-import Chrome from '../init/init'
-import { event } from '../imports/EventEmitter'
+import InitChrome from '../init/init'
+import { core } from '../imports/EventEmitter'
 import Puppeteer, { screenshot, screenshotRes } from './index'
 
 export interface RunConfig {
@@ -29,7 +29,7 @@ export interface RunConfig {
   dir?: string
 }
 
-export default class Core {
+export class Render {
   index: number
   list: Puppeteer[]
   config: RunConfig
@@ -41,26 +41,26 @@ export default class Core {
 
   async init () {
     if (this.config.dir) {
-      Common.dir = this.config.dir
+      common.dir = this.config.dir
       delete this.config.dir
     }
 
     const version = '125.0.6422.78'
-    const init = new Chrome(version)
-    const executablePath = await init.start()
+    const init = new InitChrome(version)
+    const executablePath = await init.init()
 
     /** 初始化浏览器 */
     const config = {
       ...this.config,
-      userDataDir: Common.dir + '/data/userDataDir',
+      userDataDir: common.dir + '/data/userDataDir',
       executablePath,
+      /** 管道 */
+      pipe: true,
     }
     /** 监听浏览器关闭事件 移除浏览器实例 */
-    event.on('browserCrash', (id) => {
+    core.on('browserCrash', (id) => {
       const index = this.list.findIndex(item => item.id === id)
-      if (index !== -1) {
-        this.list.splice(index, 1)
-      }
+      if (index !== -1) this.list.splice(index, 1)
     })
 
     const browserCount = this.config.browserCount || 1
@@ -93,7 +93,7 @@ export default class Core {
     browser?.screenshot(id, options)
     if (browser) this.list.push(browser)
     return new Promise((resolve) => {
-      event.once(id, (data) => resolve(data))
+      core.once(id, (data) => resolve(data))
     })
   }
 }

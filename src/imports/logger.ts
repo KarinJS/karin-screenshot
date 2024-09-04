@@ -1,6 +1,6 @@
 import log4js from 'log4js'
 
-const pattern = '%[[Karin-puppeteer][%d{hh:mm:ss.SSS}][%4.4p]%] %m'
+const pattern = '%[[karin-puppeteer][%d{hh:mm:ss.SSS}][%4.4p]%] %m'
 
 log4js.configure({
   appenders: {

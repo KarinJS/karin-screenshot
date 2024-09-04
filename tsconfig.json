@@ -2,8 +2,9 @@
   "compilerOptions": {
     "target": "ES2022",
     "baseUrl": "./",
-    "module": "CommonJS",
+    "outDir": "./lib",
     "moduleResolution": "node",
+    "module": "ES2022",
     "paths": {
       "@Common": [
         "src/imports/common.ts"
@@ -13,10 +14,9 @@
       ],
       "@logger": [
         "src/imports/logger.ts"
-      ],
+      ]
     },
     "declaration": true,
-    "outDir": "./lib",
     "removeComments": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -27,4 +27,8 @@
     "src",
     "src/index.ts"
   ],
+  "tsc-alias": {
+    "resolveFullExtension": ".cjs",
+    "resolveFullPaths": true
+  }
 }

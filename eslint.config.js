@@ -1,24 +1,25 @@
 import neostandard from 'neostandard'
 
-const data = neostandard({
+export default neostandard({
   ignores: ['node_modules', 'temp', 'logs', 'data'],
   globals: ['logger', 'NodeJS'],
   ts: true,
-})
-
-const newData = []
-
-data.forEach(val => {
-  // 驼峰命名规则关闭
-  if (val?.rules?.['camelcase']) val.rules['camelcase'] = ['off']
-
-  // ts
-  if (val.name === 'neostandard/ts') {
-    Object.keys(val.rules).forEach((key) => {
-      if (val.rules[key] === 'off') val.rules[key] = 'error'
-    })
+}).map(val => {
+  if (val?.rules?.['@stylistic/comma-dangle']?.[0] === 'warn') {
+    val.rules['@stylistic/comma-dangle'] = [
+      'warn',
+      {
+        arrays: 'always-multiline',
+        enums: 'always-multiline',
+        exports: 'always-multiline',
+        imports: 'always-multiline',
+        objects: 'always-multiline',
+      },
+    ]
+    return val
   }
-  newData.push(val)
-})
 
-export default newData
+  /** 关闭驼峰命名: 追随已有标准 更自由的命名风格 */
+  if (val?.rules?.['camelcase']) val.rules['camelcase'] = ['off']
+  return val
+})

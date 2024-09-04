@@ -1,5 +1,5 @@
-import { writeFileSync } from 'fs'
-import Core from './lib/index.js'
+import fs from 'fs'
+import Core from './esm/index.mjs'
 
 const chrome = new Core({
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -7,8 +7,9 @@ const chrome = new Core({
   devtools: false,
 })
 
-chrome.init().then(() => {
-  chrome.start('https://www.google.com').then(image => {
-    writeFileSync('image.png', image.data)
-  })
-})
+try {
+  const image = await chrome.start('https://www.google.com')
+  fs.writeFileSync('image.png', image)
+} catch (e) {
+  console.error(e)
+}

@@ -20,4 +20,4 @@ class EventEmitter extends Emitter {
     this.on('newPage', () => this.newPage++)
   }
 }
-export const event = new EventEmitter()
+export const core = new EventEmitter()
